@@ -2,28 +2,42 @@
 
 ## Project Overview
 
-This project is an end-to-end personalized recommendation system for e-commerce user behavior data.
+This project is an end-to-end personalized recommendation system built using a Retailrocket-style e-commerce dataset.
 
-The system recommends relevant items to users based on implicit feedback such as product views, add-to-cart actions, and transactions. The project covers data preprocessing, feature engineering, model training, model evaluation, hybrid recommendation logic, feedback logging, retraining workflow, MLflow tracking, and a local Streamlit demo.
-
-## Problem Statement
-
-E-commerce platforms need to recommend relevant products to users based on their previous behavior.
-
-Unlike explicit rating systems, this project works with implicit feedback. Users do not directly rate products, so their actions must be converted into meaningful interaction signals.
-
-The goal is to generate Top-N item recommendations for each user.
+The system recommends relevant items to users based on implicit feedback such as product views, add-to-cart actions, and transactions. The project includes data preprocessing, feature engineering, model training, model evaluation, hybrid recommendation logic, feedback logging, a retraining workflow concept, MLflow tracking, and a local Streamlit demo.
 
 ## Dataset
 
-The project uses Retailrocket-style e-commerce data, including:
+The project uses a Retailrocket-style e-commerce dataset that includes:
 
 * User-item interaction events
-* Event types: view, addtocart, transaction
+* Event types: `view`, `addtocart`, and `transaction`
 * Item properties
 * Timestamps
 
+Since the dataset uses anonymized product identifiers, the demo displays recommended **item IDs** instead of real product names or product images.
+
 Raw and processed data files are not included in this repository because they are generated files and may be large.
+
+## System Flow
+
+The following diagram shows how the recommendation system works:
+
+![Recommendation System Flowchart](how_recommendation_systems_work_flowchart.png)
+
+## How the System Works
+
+The system handles two main user cases:
+
+### Known Users
+
+If the user already exists in the training data, the system generates personalized recommendations using a **Hybrid ALS + Content-Based** recommender.
+
+### Cold-Start Users
+
+If the user is new and has no historical interactions, the system uses a **Popularity Fallback** strategy.
+
+After recommendations are generated, user interactions can be logged and later used by the retraining workflow.
 
 ## Main Pipeline
 
@@ -42,7 +56,7 @@ The project pipeline includes:
 11. Evaluating models using ranking metrics
 12. Selecting the final hybrid recommender
 13. Logging user feedback
-14. Supporting retraining workflow
+14. Supporting a retraining workflow
 15. Running a local Streamlit demo
 
 ## Models Implemented
@@ -57,7 +71,7 @@ The following recommendation approaches were implemented and compared:
 
 ## Final Model
 
-The final selected model is a Hybrid ALS + Content-Based Recommender.
+The final selected model is a **Hybrid ALS + Content-Based Recommender**.
 
 The hybrid model combines:
 
@@ -67,10 +81,10 @@ The hybrid model combines:
 
 Final hybrid configuration:
 
-* ALS weight: 0.7
-* Content-based weight: 0.3
-* Candidate generation size: 100
-* Cold-start strategy: Popularity fallback
+* ALS weight: `0.7`
+* Content-based weight: `0.3`
+* Candidate generation size: `100`
+* Cold-start strategy: `Popularity Fallback`
 
 ## Evaluation Metrics
 
@@ -82,43 +96,27 @@ The models were evaluated using Top-K ranking metrics:
 * NDCG@K
 * Coverage@K
 
-NDCG@10 was used as the primary ranking metric because it considers both recommendation relevance and item position in the ranked list.
-
-## System Behavior
-
-The system handles two main user cases:
-
-### Known Users
-
-If the user exists in the training data, the system generates personalized recommendations using the hybrid recommendation model.
-
-### Cold-Start Users
-
-If the user is new and has no historical interactions, the system uses a popularity-based fallback strategy.
-
-When the user interacts with recommended items, the feedback can be logged and later used in the retraining pipeline.
+`NDCG@10` was used as the primary ranking metric because it considers both recommendation relevance and item position in the ranked list.
 
 ## Project Structure
 
 ```text
 .
+├── how_recommendation_systems_work_flowchart.png
 ├── notebooks/
 │   ├── Milestone_1.ipynb
 │   └── milestone_2.ipynb
-│
 ├── reports/
 │   ├── final_data_quality_leakage_report.json
 │   ├── milestone_1_summary.json
 │   ├── mlflow_clean_summary.json
 │   ├── mlflow_run_summary.json
 │   └── retraining_strategy.md
-│
 ├── src/
 │   ├── feedback_logger.py
 │   ├── mlflow_tracking.py
 │   ├── retraining_pipeline.py
 │   └── run_local_demo.py
-│
 ├── streamlit_app.py
 ├── requirements.txt
 ├── README.md
@@ -129,11 +127,11 @@ When the user interacts with recommended items, the feedback can be logged and l
 
 ### `src/feedback_logger.py`
 
-Logs user feedback such as views, add-to-cart actions, and transactions. This feedback can later be used for retraining.
+Logs user feedback such as views, add-to-cart actions, and transactions. This feedback can later be used by the retraining pipeline.
 
 ### `src/retraining_pipeline.py`
 
-Simulates the retraining workflow by using newly logged feedback and updating the recommendation pipeline.
+Implements the retraining workflow using newly collected feedback.
 
 ### `src/mlflow_tracking.py`
 
@@ -145,7 +143,16 @@ Runs a local command-line demo for generating recommendations for a selected use
 
 ### `streamlit_app.py`
 
-Provides a simple local Streamlit interface to test the recommendation system.
+Provides a local Streamlit interface to test the recommendation system.
+
+## Local Demo
+
+The Streamlit demo allows testing two recommendation scenarios:
+
+* **Known user:** generates personalized recommendations using the Hybrid ALS + Content-Based model.
+* **Cold-start user:** generates recommendations using popularity fallback.
+
+The demo also includes a feedback logging section to simulate how user interactions can be collected for future retraining.
 
 ## How to Run
 
@@ -179,29 +186,36 @@ pip install -r requirements.txt
 ### 5. Run the Streamlit demo
 
 ```bash
-streamlit run streamlit_app.py
+python -m streamlit run streamlit_app.py
 ```
 
-## Notes
+## Important Note About Running the Demo
 
 The repository does not include raw data, processed data, MLflow runs, or trained model artifacts.
 
-Ignored files include:
+To run the demo successfully, the required generated model artifacts should exist locally in the expected folders, such as `model_artifacts/`.
+
+These files are excluded from GitHub to keep the repository clean and lightweight.
+
+## Ignored Files
+
+The following files and folders are ignored:
 
 * `data/`
 * `model_artifacts/`
 * `mlruns/`
 * `outputs/`
 * `mlflow.db`
-
-These files are excluded to keep the repository clean and lightweight.
+* `.venv/`
+* `__pycache__/`
 
 ## Limitations
 
 * The current demo is local and not deployed to a cloud platform.
 * Large model artifacts are not included in the repository.
 * Cold-start users are handled using popularity fallback.
-* The retraining workflow is implemented as a local pipeline.
+* The dataset is anonymized, so recommendations are displayed as item IDs instead of product names or images.
+* The Streamlit app is designed as a simple local demo, not a production frontend.
 
 ## Future Work
 
@@ -212,6 +226,7 @@ These files are excluded to keep the repository clean and lightweight.
 * Add monitoring dashboard
 * Add Docker support
 * Improve frontend design
+* Add product metadata visualization if non-anonymized data is available
 
 ## Skills Demonstrated
 
