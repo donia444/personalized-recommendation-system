@@ -1,0 +1,33 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data
+data/
+
+# Model artifacts
+model_artifacts/
+
+# MLflow local tracking
+mlruns/
+mlflow.db
+
+# Generated outputs
+outputs/
+
+# Environment variables
+.env
+
+# OS files
+.DS_Store
+Thumbs.db

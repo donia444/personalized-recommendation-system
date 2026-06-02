@@ -1,0 +1,11 @@
+pandas
+numpy
+scipy
+scikit-learn
+implicit
+mlflow
+joblib
+matplotlib
+tqdm
+mlflow
+streamlit

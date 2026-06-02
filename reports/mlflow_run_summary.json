@@ -1,0 +1,37 @@
+{
+    "model_name": "Hybrid ALS + Content-Based Recommender",
+    "experiment_name": "Final_Recommender_MLOps_Tracking",
+    "run_name": "final_hybrid_als_content_test_all",
+    "params": {
+        "model_type": "hybrid_recommender",
+        "collaborative_model": "ALS",
+        "content_model": "TF-IDF Content-Based",
+        "fusion_method": "Weighted Rank Fusion",
+        "als_weight": 0.7,
+        "content_weight": 0.3,
+        "candidate_k": 100,
+        "cold_start_strategy": "Popularity Fallback",
+        "primary_evaluation_split": "test_all",
+        "primary_evaluation_data": "all_interactions",
+        "all_interactions_definition": "view + addtocart + transaction",
+        "deployment_status": "local_demo_only"
+    },
+    "metrics": {
+        "test_all_precision_at_5": 0.034873,
+        "test_all_recall_at_5": 0.116949,
+        "test_all_map_at_5": 0.062858,
+        "test_all_ndcg_at_5": 0.082984,
+        "test_all_coverage_at_5": 0.651668,
+        "test_all_precision_at_10": 0.02776,
+        "test_all_recall_at_10": 0.184824,
+        "test_all_map_at_10": 0.072545,
+        "test_all_ndcg_at_10": 0.106818,
+        "test_all_coverage_at_10": 0.823475,
+        "test_all_precision_at_20": 0.020879,
+        "test_all_recall_at_20": 0.274536,
+        "test_all_map_at_20": 0.079732,
+        "test_all_ndcg_at_20": 0.131883,
+        "test_all_coverage_at_20": 0.916868
+    },
+    "notes": "Milestone 3 cloud deployment was cancelled. The final model was tested using a local Streamlit demo. MLflow was used to track the final model parameters, test_all metrics, and saved artifacts."
+}

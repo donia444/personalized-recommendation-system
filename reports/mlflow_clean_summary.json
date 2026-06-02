@@ -1,0 +1,26 @@
+{
+    "model_name": "Hybrid ALS + Content-Based Recommender",
+    "experiment_name": "Final_Recommender_Clean_Tracking",
+    "run_name": "final_hybrid_als_content_clean",
+    "params": {
+        "model_type": "hybrid_recommender",
+        "collaborative_model": "ALS",
+        "content_model": "TF-IDF Content-Based",
+        "fusion_method": "Weighted Rank Fusion",
+        "als_weight": 0.7,
+        "content_weight": 0.3,
+        "candidate_k": 100,
+        "cold_start_strategy": "Popularity Fallback",
+        "evaluation_split": "test_all",
+        "evaluation_data": "view + addtocart + transaction",
+        "deployment_status": "local_demo_only"
+    },
+    "metrics": {
+        "test_all_precision_at_10": 0.02776,
+        "test_all_recall_at_10": 0.184824,
+        "test_all_map_at_10": 0.072545,
+        "test_all_ndcg_at_10": 0.106818,
+        "test_all_coverage_at_10": 0.823475
+    },
+    "notes": "This is a simplified MLflow tracking run. Only key @10 test_all metrics are logged to keep the dashboard clean. Full evaluation metrics are available in the final notebook. Milestone 3 cloud deployment was cancelled, so the model is demonstrated locally using Streamlit."
+}

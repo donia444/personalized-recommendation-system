@@ -1,0 +1,102 @@
+[
+    {
+        "check": "train required columns",
+        "status": "PASS",
+        "details": "All required columns exist."
+    },
+    {
+        "check": "validation required columns",
+        "status": "PASS",
+        "details": "All required columns exist."
+    },
+    {
+        "check": "test required columns",
+        "status": "PASS",
+        "details": "All required columns exist."
+    },
+    {
+        "check": "train missing values",
+        "status": "PASS",
+        "details": "No missing values in required columns."
+    },
+    {
+        "check": "validation missing values",
+        "status": "PASS",
+        "details": "No missing values in required columns."
+    },
+    {
+        "check": "test missing values",
+        "status": "PASS",
+        "details": "No missing values in required columns."
+    },
+    {
+        "check": "train duplicate user-item pairs",
+        "status": "PASS",
+        "details": "No duplicated user-item pairs."
+    },
+    {
+        "check": "validation duplicate user-item pairs",
+        "status": "PASS",
+        "details": "No duplicated user-item pairs."
+    },
+    {
+        "check": "test duplicate user-item pairs",
+        "status": "PASS",
+        "details": "No duplicated user-item pairs."
+    },
+    {
+        "check": "user-item leakage across splits",
+        "status": "PASS",
+        "details": "No repeated user-item pairs across train/validation/test."
+    },
+    {
+        "check": "chronological leakage",
+        "status": "PASS",
+        "details": "Train happens before validation/test, and validation happens before test per user."
+    },
+    {
+        "check": "cold-start filtering",
+        "status": "PASS",
+        "details": "Validation/test contain only users and items known from train."
+    },
+    {
+        "check": "train interaction strength",
+        "status": "PASS",
+        "details": "All interaction strengths are positive and finite."
+    },
+    {
+        "check": "validation interaction strength",
+        "status": "PASS",
+        "details": "All interaction strengths are positive and finite."
+    },
+    {
+        "check": "test interaction strength",
+        "status": "PASS",
+        "details": "All interaction strengths are positive and finite."
+    },
+    {
+        "check": "encoder consistency",
+        "status": "PASS",
+        "details": "user_idx and item_idx are within encoder ranges."
+    },
+    {
+        "check": "train sparse matrix consistency",
+        "status": "PASS",
+        "details": "Matrix shape and non-zero values match train data."
+    },
+    {
+        "check": "user_seen_items consistency",
+        "status": "PASS",
+        "details": "Seen items dictionary matches train interactions."
+    },
+    {
+        "check": "ground truth consistency",
+        "status": "PASS",
+        "details": "Ground truth dictionaries are consistent with validation/test data."
+    },
+    {
+        "check": "content metadata consistency",
+        "status": "PASS",
+        "details": "item_features and TF-IDF matrix align with encoded model items."
+    }
+]

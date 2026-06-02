@@ -1,0 +1,158 @@
+{
+    "raw_events_rows": 2756101,
+    "clean_events_rows": 2755641,
+    "aggregated_user_item_pairs": 2145179,
+    "filtered_user_item_pairs": 248891,
+    "raw_unique_users": 1407580,
+    "raw_unique_items": 235061,
+    "filtered_unique_users": 22890,
+    "filtered_unique_items": 18269,
+    "split_summary": {
+        "train": {
+            "rows": 155049,
+            "unique_users": 22890,
+            "unique_items": 18224
+        },
+        "validation_known": {
+            "rows": 46825,
+            "unique_users": 22869,
+            "unique_items": 15270
+        },
+        "test_known": {
+            "rows": 46763,
+            "unique_users": 22860,
+            "unique_items": 15152
+        }
+    },
+    "sparsity_summary": {
+        "before_filtering": {
+            "num_users": 1407580,
+            "num_items": 235061,
+            "observed_pairs": 2145179,
+            "density_percentage": 0.0006483505297320101,
+            "sparsity_percentage": 99.99935164947027
+        },
+        "after_filtering": {
+            "num_users": 22890,
+            "num_items": 18269,
+            "observed_pairs": 248891,
+            "density_percentage": 0.05951804044125674,
+            "sparsity_percentage": 99.94048195955875
+        },
+        "train_matrix": {
+            "num_users": 22890,
+            "num_items": 18224,
+            "observed_pairs": 155049,
+            "density_percentage": 0.037168879601683205,
+            "sparsity_percentage": 99.96283112039832
+        }
+    },
+    "metadata_summary": {
+        "total_model_items": 18224,
+        "items_with_category": 17542,
+        "category_coverage_percentage": 96.25768217734854,
+        "items_with_availability": 17542,
+        "availability_coverage_percentage": 96.25768217734854,
+        "items_with_property_text": 17542,
+        "property_text_coverage_percentage": 96.25768217734854,
+        "tfidf_matrix_shape": [
+            18224,
+            300
+        ]
+    },
+    "train_matrix_shape": [
+        22890,
+        18224
+    ],
+    "train_matrix_nonzero": 155049,
+    "event_weights": {
+        "view": 1.0,
+        "addtocart": 3.0,
+        "transaction": 10.0
+    },
+    "recency_weighting": {
+        "used": true,
+        "half_life_days": 30
+    },
+    "filtering": {
+        "min_user_interactions": 5,
+        "min_item_interactions": 5
+    },
+    "final_quality_checks": [
+        {
+            "check": "train required columns",
+            "status": "PASS",
+            "details": "All required columns exist."
+        },
+        {
+            "check": "validation required columns",
+            "status": "PASS",
+            "details": "All required columns exist."
+        },
+        {
+            "check": "test required columns",
+            "status": "PASS",
+            "details": "All required columns exist."
+        },
+        {
+            "check": "train missing values",
+            "status": "PASS",
+            "details": "No missing values in required columns."
+        },
+        {
+            "check": "validation missing values",
+            "status": "PASS",
+            "details": "No missing values in required columns."
+        },
+        {
+            "check": "test missing values",
+            "status": "PASS",
+            "details": "No missing values in required columns."
+        },
+        {
+            "check": "train duplicate user-item pairs",
+            "status": "PASS",
+            "details": "No duplicated user-item pairs."
+        },
+        {
+            "check": "validation duplicate user-item pairs",
+            "status": "PASS",
+            "details": "No duplicated user-item pairs."
+        },
+        {
+            "check": "test duplicate user-item pairs",
+            "status": "PASS",
+            "details": "No duplicated user-item pairs."
+        },
+        {
+            "check": "user-item leakage across splits",
+            "status": "PASS",
+            "details": "No repeated user-item pairs across train/validation/test."
+        },
+        {
+            "check": "chronological leakage",
+            "status": "PASS",
+            "details": "Train happens before validation/test, and validation happens before test per user."
+        },
+        {
+            "check": "cold-start filtering",
+            "status": "PASS",
+            "details": "Validation/test contain only users and items known from train."
+        },
+        {
+            "check": "train sparse matrix consistency",
+            "status": "PASS",
+            "details": "Matrix shape and non-zero values match train data."
+        },
+        {
+            "check": "ground truth consistency",
+            "status": "PASS",
+            "details": "Ground truth dictionaries are consistent with validation/test data."
+        },
+        {
+            "check": "content metadata consistency",
+            "status": "PASS",
+            "details": "item_features and TF-IDF matrix align with encoded model items."
+        }
+    ]
+}
